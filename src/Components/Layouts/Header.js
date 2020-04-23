@@ -13,7 +13,7 @@ export default props => (
         <IconButton edge="start" color="inherit" aria-label="menu">
           <MenuIcon />
         </IconButton>
-        <Typography variant="overline">News</Typography>
+        <Typography variant="overline">Excersises</Typography>
       </Toolbar>
     </AppBar>
   </div>
