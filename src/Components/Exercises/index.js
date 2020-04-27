@@ -28,7 +28,11 @@ export default ({
   <Grid container spacing={2}>
     <Grid item sm>
       <Paper style={styles.Paper}>
-        {exercises.map(([group, exercises]) => 
+      {/* {exercises.map(([group, exercises]) =>
+        // console.log(group)  
+        console.log(exercises)  
+      )} */}
+        {exercises.map(([group, exercises]) =>
         !catagory || catagory === group
           ? <Fragment key={group}>
               <Typography 
@@ -52,8 +56,6 @@ export default ({
               </List>
             </Fragment>
           : null
-        
-          
         )}
       </Paper>
     </Grid>
