@@ -13,6 +13,8 @@ const styles = theme => ({
   }
 })
 
+const a = 1
+
 export default withStyles(styles) (class extends Component {
   state = this.getInitState()
   
@@ -25,6 +27,8 @@ export default withStyles(styles) (class extends Component {
       muscles: ''
     }
   }  
+
+ 
 
   handleChange = name => ({target: {value}}) => {
     // console.location("...this.state.exercise: ", ...this.state.exercise)
