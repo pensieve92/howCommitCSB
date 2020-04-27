@@ -10,6 +10,12 @@ export default class extends Component {
   }
 
   getExercisesByMuscles() {
+    const initExercises = muscles.reduce((exercises, category) => ({
+      ...exercises,
+      [category]:[]
+    }), {} )
+
+
     return Object.entries(
       this.state.exercises.reduce((exercises, exercise) => {
         const { muscles } = exercise;
@@ -20,9 +26,11 @@ export default class extends Component {
         // console.log("muscles: ", {muscles})
         // console.log("exercises[muscles]: ", exercises[muscles]) // undefined
         
-        exercises[muscles] = exercises[muscles]
-          ? [...exercises[muscles], exercise]
-          : [exercise]
+        // exercises[muscles] = exercises[muscles]
+        //   ? [...exercises[muscles], exercise]
+        //   : [exercise]
+
+        exercises[muscles] = [...exercises[muscles], exercise]
 
         // console.log("[...exercises[muscles], exercise]: ", [...exercises[muscles], exercise])
         // console.log("[exercise]: ", [exercise])
@@ -30,7 +38,7 @@ export default class extends Component {
         // console.log("exercises[muscles]: ", exercises[muscles])
         // console.log("exercises: ", exercises)
         return exercises;
-      }, {})
+      }, initExercises)
     )
   }
 
@@ -56,6 +64,22 @@ export default class extends Component {
   }
   
 
+  handleExerciseCreate = exercise => {
+    this.setState(({exercises}) => ({
+      exercises: [
+        ...exercises,
+        exercise
+      ]
+    }))
+  }
+
+  handleExercisesDelete = id => {
+    this.setState(({exercises}) => ({
+      exercises: exercises.filter(ex => ex.id !== id )
+    }))
+  }
+  
+
   render() {
     // console.log(this.getExercisesByMuscles())
     const exersises = this.getExercisesByMuscles(), 
@@ -72,6 +96,7 @@ export default class extends Component {
           exercise={exercise}
           catagory={catagory} 
           onSelect={this.handleExerciseSelected}
+          onDelete={this.handleExercisesDelete}
         />
 
         <Footer 
