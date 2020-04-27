@@ -5,9 +5,9 @@ import Typography from "@material-ui/core/Typography";
 // import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import CreateDialog from '../Exercises/Dialogs/Create'
+import CreateDialog from '../Exercises/Dialog'
 
-export default props => (
+export default ({muscles, onExerciseCreate}) => (
   <div>
     <AppBar position="static">
       <Toolbar  >
@@ -17,7 +17,10 @@ export default props => (
         <Typography variant="h5" style={{flex: 1}} >
           Excersises
         </Typography>
-        <CreateDialog/>
+        <CreateDialog
+          muscles={muscles}
+          onCreate={onExerciseCreate}
+        />
       </Toolbar>
     </AppBar>
   </div>
