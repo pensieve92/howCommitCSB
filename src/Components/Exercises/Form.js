@@ -13,7 +13,6 @@ const styles = theme => ({
   }
 })
 
-const a = 1
 
 export default withStyles(styles) (class extends Component {
   state = this.getInitState()
@@ -28,6 +27,11 @@ export default withStyles(styles) (class extends Component {
     }
   }  
 
+  UNSAFE_componentWillReceiveProps({exercise}){
+    this.setState({
+      ...exercise
+    })
+  }
  
 
   handleChange = name => ({target: {value}}) => {
@@ -40,27 +44,18 @@ export default withStyles(styles) (class extends Component {
   handleSubmit = () => {
     // TODO: validate
 
-    const { exercise } = this.state
-    
     this.props.onSubmit({
-      ...exercise,
-      id: exercise.title.toLocaleLowerCase().replace( / /g, '-')
+      id: this.state.title.toLocaleLowerCase().replace( / /g, '-'),
+      ...this.state      
     })
 
-    this.setState({
-      open: false,
-      exercise: {
-        title: '',
-        description: '',
-        muscles: ''
-      }
-    })
+    this.setState(this.getInitState())
   }
  
   render(){
 
     const {  title, description, muscles } = this.state,
-          {classes, muscles: categories} = this.props         
+          {classes, muscles: categories, exercise} = this.props         
 
     return <form>
             <TextField
@@ -109,7 +104,7 @@ export default withStyles(styles) (class extends Component {
               color="primary" 
               variant="contained"
               onClick={this.handleSubmit}>
-              Create
+                {exercise ? 'Edit' : 'Create'}              
             </Button>
           </form>
   }
